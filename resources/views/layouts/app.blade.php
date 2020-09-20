@@ -74,9 +74,10 @@
                 </div>
             </div>
         </nav>
-
-        <main class="py-4">
-            @yield('content')
+        <main class="mt-5 pt-5">
+            <div class="container">
+                    @yield('content')
+            </div>
         </main>
     </div>
     <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
