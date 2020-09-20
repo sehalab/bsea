@@ -11,15 +11,17 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-
+    <link href="/css/fontawesome-all.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <!-- Material Design Bootstrap -->
     <link href="/css/mdb.min.css" rel="stylesheet">
     <!-- Your custom styles (optional) -->
+    <link href="/css/addons-pro/stepper.css" rel="stylesheet">
+    <!-- Stepper CSS - minified-->
+    <link href="/css/addons-pro/stepper.min.css" rel="stylesheet">
     <link href="/css/style.min.css" rel="stylesheet">
 </head>
 <body>
@@ -80,7 +82,7 @@
             </div>
         </main>
     </div>
-    <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-3.4.0.min.js"></script>
     <!-- Bootstrap tooltips -->
     <script type="text/javascript" src="/js/popper.min.js"></script>
     <!-- Bootstrap core JavaScript -->
@@ -88,10 +90,45 @@
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="/js/mdb.min.js"></script>
     <!-- Initializations -->
+    <script type="text/javascript" src="/js/addons-pro/stepper.js"></script>
+    <!-- Stepper JavaScript - minified -->
+    <script type="text/javascript" src="/js/addons-pro/stepper.min.js"></script>
     <script type="text/javascript">
         // Animations initialization
         new WOW().init();
 
+    </script>
+    <script>
+        // Data Picker Initialization
+        $('.datepicker').pickadate();
+    </script>
+    <script>
+        // Material Select Initialization
+        $(document).ready(function() {
+        $('.mdb-select').materialSelect();
+        });
+    </script>
+    <script>
+        function someFunction() {
+            setTimeout(function ()
+            {
+                $('#feedback-step').nextStep();
+            }, 2000);
+        }
+
+        $(document).ready(function ()
+        {
+            $('.stepper').mdbStepper();
+        })
+        $(document).ready(function () {
+            $('.stepper').mdbStepper();
+        })
+
+        function someFunction21() {
+            setTimeout(function () {
+                $('#horizontal-stepper').nextStep();
+            }, 2000);
+        }
     </script>
 </body>
 </html>
