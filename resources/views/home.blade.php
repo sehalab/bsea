@@ -13,7 +13,8 @@
 
                 <!--Card content-->
                 <div class="card-body px-lg-5">
-                    <form action="{{ route('foyer.create') }}" method="post">
+                    <form action="{{ route('foyer.store') }}" method="post">
+                        @csrf
                         <ul class="stepper horizontal" id="horizontal-stepper">
                             <li class="step active">
                                 <div class="step-title waves-effect waves-dark">Step 1</div>
@@ -53,7 +54,7 @@
                                 <div class="step-new-content">
                                     Finish!
                                     <div class="step-actions">
-                                        <button class="waves-effect waves-dark btn-sm btn btn-primary m-0 mt-4" type="button">SUBMIT</button>
+                                        <button class="waves-effect waves-dark btn-sm btn btn-primary m-0 mt-4" type="submit">SUBMIT</button>
                                     </div>
                                 </div>
                             </li>
