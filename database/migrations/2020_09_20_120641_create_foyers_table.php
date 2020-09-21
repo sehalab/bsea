@@ -15,7 +15,17 @@ class CreateFoyersTable extends Migration
     {
         Schema::create('foyers', function (Blueprint $table) {
             $table->id();
+            $table->string('numero');
+            $table->string('nom_village');
+            $table->string('photo');
+            $table->unsignedBigInteger('user_id');
+            $table->string('latitude');
+            $table->string('longitude');
             $table->timestamps();
+        });
+
+        Schema::table('foyers', function(Blueprint $table){
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
         });
     }
 

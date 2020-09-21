@@ -15,8 +15,16 @@ class CreateArbresTable extends Migration
     {
         Schema::create('arbres', function (Blueprint $table) {
             $table->id();
+            $table->string('usage');
+            $table->string('nom');
+            $table->unsignedBigInteger('propriete_id');
             $table->timestamps();
         });
+
+        Schema::table('arbres', function (Blueprint $table) {
+            $table->foreign('propriete_id')->references('id')->on('proprietes')->cascadeOnDelete();
+        });
+
     }
 
     /**

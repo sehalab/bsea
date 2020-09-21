@@ -15,7 +15,16 @@ class CreateStructuresTable extends Migration
     {
         Schema::create('structures', function (Blueprint $table) {
             $table->id();
+            $table->string('photo');
+            $table->mediumInteger('longueur');
+            $table->mediumInteger('largeur');
+            $table->string('materiaux');
+            $table->unsignedBigInteger('propriete_id');
             $table->timestamps();
+        });
+
+        Schema::table('structures', function(Blueprint $table){
+            $table->foreign('propriete_id')->references('id')->on('proprietes')->cascadeOnDelete();
         });
     }
 

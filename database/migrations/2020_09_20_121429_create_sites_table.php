@@ -15,8 +15,19 @@ class CreateSitesTable extends Migration
     {
         Schema::create('sites', function (Blueprint $table) {
             $table->id();
+            $table->string('description');
+            $table->string('refphoto');
+            $table->boolean('etat');
+            $table->unsignedBigInteger('propriete_id');
+            $table->string('local_E');
+            $table->string('local_N');
             $table->timestamps();
         });
+
+        Schema::table('sites', function (Blueprint $table) {
+            $table->foreign('propriete_id')->references('id')->on('proprietes')->cascadeOnDelete();
+        });
+
     }
 
     /**
