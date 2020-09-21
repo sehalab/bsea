@@ -1,0 +1,27 @@
+{
+    "sqltools.connections": [
+        {
+            "database": "safe",
+            "dialect": "MySQL",
+            "name": "connect",
+            "password": "root",
+            "port": 3306,
+            "server": "localhost",
+            "username": "root",
+            "driver": "MySQL"
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "askForPassword": true,
+            "driver": "MySQL",
+            "name": "localhost",
+            "username": "root",
+            "database": "bseardc"
+        }
+    ]
+}

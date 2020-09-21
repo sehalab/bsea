@@ -15,7 +15,21 @@ class CreateMembresTable extends Migration
     {
         Schema::create('membres', function (Blueprint $table) {
             $table->id();
+            $table->string('nomcomplet');
+            $table->string('relation');
+            $table->string('genre');
+            $table->mediumInteger('age');
+            $table->string('niveauetudes');
+            $table->string('occupation');
+            $table->string('vulnerabilite');
+            $table->string('ecole');
+            $table->string('etatcivil');
+            $table->unsignedBigInteger('propriete_id');
             $table->timestamps();
+        });
+
+        Schema::table('membres', function(Blueprint $table){
+            $table->foreign('propriete_id')->references('id')->on('proprietes')->cascadeOnDelete();
         });
     }
 

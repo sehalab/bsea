@@ -15,7 +15,13 @@ class CreateBetailsTable extends Migration
     {
         Schema::create('betails', function (Blueprint $table) {
             $table->id();
+            $table->string('nom');
+            $table->unsignedBigInteger('propriete_id');
             $table->timestamps();
+        });
+
+        Schema::table('betails', function(Blueprint $table){
+            $table->foreign('propriete_id')->references('id')->on('proprietes')->cascadeOnDelete();
         });
     }
 

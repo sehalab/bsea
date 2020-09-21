@@ -15,7 +15,18 @@ class CreateTombesTable extends Migration
     {
         Schema::create('tombes', function (Blueprint $table) {
             $table->id();
+            $table->string('lienparente');
+            $table->string('refphoto');
+            $table->string('heure');
+            $table->mediumInteger('annee');
+            $table->unsignedBigInteger('propriete_id');
+            $table->string('local_E');
+            $table->string('local_N');
             $table->timestamps();
+        });
+
+        Schema::table('tombes', function(Blueprint $table){
+            $table->foreign('propriete_id')->references('id')->on('proprietes')->cascadeOnDelete();
         });
     }
 

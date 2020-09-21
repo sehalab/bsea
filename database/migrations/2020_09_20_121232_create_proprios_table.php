@@ -15,6 +15,10 @@ class CreatePropriosTable extends Migration
     {
         Schema::create('proprios', function (Blueprint $table) {
             $table->id();
+            $table->string('nom');
+            $table->string('prenom');
+            $table->string('telephone');
+            $table->string('adresse');
             $table->timestamps();
         });
     }
