@@ -6,5 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Details extends Model
 {
-    //
+    protected $fillable = [
+        "statut", "duree", "propriete_id", "proprio_id"
+    ];
 }

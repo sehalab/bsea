@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Details;
+use App\Proprio;
 use Illuminate\Http\Request;
 
 class DetailsController extends Controller
@@ -35,7 +36,31 @@ class DetailsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $proprio = null;
+        if (isset($request->nom, $request->prenom, $request->telephone, $request->adresse)) {
+            $proprio = Proprio::create([
+                "nom" => $request->nom,
+                "prenom" => $request->prenom,
+                "telephone" => $request->telephone,
+                "adresse" => $request->adresse,
+            ]);
+
+            Details::create([
+                "statut" => $request->statut,
+                "duree" => $request->duree,
+                "propriete_id" => $request->propriete_id,
+                "proprio_id" => $proprio->id,
+            ]);
+
+        }
+        else{
+            Details::create([
+                "statut"=>$request->statut,
+                "duree"=>$request->duree,
+                "propriete_id"=>$request->propriete_id,
+                "proprio_id"=>0,
+            ]);
+        }
     }
 
     /**

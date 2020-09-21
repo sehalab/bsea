@@ -129,6 +129,18 @@
                 $('#horizontal-stepper').nextStep();
             }, 2000);
         }
+
+        $(document).ready(function(){
+            $('.select').change(function(e){
+                if($(this).val() === "proprio"){
+                    $('.form-control').each(function(index, element){
+                        if(typeof $(this).attr('required') == 'undefined'){
+                            $(this).attr('disabled', 'disabled');
+                        }
+                    });
+                }
+            })
+        });
     </script>
 </body>
 </html>
