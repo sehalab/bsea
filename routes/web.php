@@ -23,3 +23,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/foyer', 'FoyerController');
 Route::resource('/propriete', 'ProprieteController');
 Route::resource('/details', 'DetailsController');
+Route::resource('/structure', 'StructureController');
+Route::resource('/membre', 'MembreController');

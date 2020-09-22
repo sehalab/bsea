@@ -35,7 +35,27 @@ class StructureController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $imageName = time() . '.' . request()->photo->getClientOriginalExtension();
+
+        $request->photo->move(public_path('images'), $imageName);
+
+        Structure::create([
+            "photo" => $imageName,
+            "longueur" => $request->longueur,
+            "largeur" => $request->largeur,
+            "materiaux" => $request->materiaux,
+            "propriete_id" => $request->propriete_id,
+        ]);
+
+        return view('home')
+            ->with('success', 'La structure a été bien enregistrée.')
+            ->withSection("membres")
+            ->withPropriete($request->propriete_id);
+
     }
 
     /**

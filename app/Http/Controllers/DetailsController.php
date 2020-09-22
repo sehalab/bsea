@@ -52,15 +52,20 @@ class DetailsController extends Controller
                 "proprio_id" => $proprio->id,
             ]);
 
-        }
-        else{
+        } else {
             Details::create([
-                "statut"=>$request->statut,
-                "duree"=>$request->duree,
-                "propriete_id"=>$request->propriete_id,
-                "proprio_id"=>0,
+                "statut" => $request->statut,
+                "duree" => $request->duree,
+                "propriete_id" => $request->propriete_id,
+                "proprio_id" => 0,
             ]);
         }
+
+        return view('home')
+            ->with('success', 'You have successfully upload image.')
+            ->withSection("structure")
+            ->withPropriete($request->propriete_id);
+
     }
 
     /**
