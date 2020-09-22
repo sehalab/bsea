@@ -36,13 +36,25 @@ class FoyerController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+        $this->validate($request, [
+                'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'numero' => 'required',
+                'nom_village' => 'required|max:255|min:4',
+                'latitude' => 'required|alpha_num|max:255|min:4',
+                'longitude' => 'required|alpha_num|max:255|min:4',
+            ],[
+                'required' => 'La :attribute est requise',
+                'numero.required' => 'Le numero est requis',
+                'nom_village.required' => 'Le nom du village est requise',
+                'between' => "la :attribute :input doit être entre :min - :max",
+            ]
+        );
+
 
         $imageName = time().'.'.request()->photo->getClientOriginalExtension();
 
         $request->photo->move(public_path('images'), $imageName);
+
 
         $foyer = Foyer::create([
             'numero' => $request->numero,

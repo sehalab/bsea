@@ -35,9 +35,19 @@ class ProprieteController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+        $this->validate($request, [
+                'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'nom' => 'required',
+                'postnom' => 'required|max:255|min:4',
+                'genre' => 'required|alpha_num|max:255|min:4',
+                'etatcivil' => 'required|alpha_num|max:255|min:4',
+                'numerocarte' => 'required|alpha_num|max:255|min:4',
+            ], [
+                'required' => 'Le :attribute est requis',
+                'etatcivil.required' => "L' etat civil est requis",
+                'between' => "la :attribute :input doit être entre :min - :max",
+            ]
+        );
 
         $imageName = time() . '.' . request()->photo->getClientOriginalExtension();
 
