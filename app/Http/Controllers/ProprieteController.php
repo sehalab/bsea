@@ -35,7 +35,29 @@ class ProprieteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $imageName = time() . '.' . request()->photo->getClientOriginalExtension();
+
+        $request->photo->move(public_path('images'), $imageName);
+
+        $propriete = Propriete::create([
+            'nom' => $request->nom,
+            'postnom' => $request->postnom,
+            'genre' => $request->genre,
+            'etatcivil' => $request->etatcivil,
+            'numerocarte' => $request->numerocarte,
+            'photo' => $imageName,
+            'foyer_id' => $request->foyer_id,
+        ]);
+
+        return view('home')
+            ->with('success', 'You have successfully upload image.')
+            ->withSection("details")
+            ->withPropriete($propriete->id);
+
     }
 
     /**

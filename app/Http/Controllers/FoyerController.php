@@ -36,13 +36,27 @@ class FoyerController extends Controller
      */
     public function store(Request $request)
     {
-        Foyer::create([
+        $request->validate([
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $imageName = time().'.'.request()->photo->getClientOriginalExtension();
+
+        $request->photo->move(public_path('images'), $imageName);
+
+        $foyer = Foyer::create([
             'numero' => $request->numero,
             'nom_village' => $request->nom_village,
-            'photo' => time() . 'png',
+            'photo' => $imageName,
+            'latitude'=>$request->latitude,
+            'longitude'=>$request->longitude,
             'user_id' => Auth::user()->id,
         ]);
-        return back();
+
+        return view('home')
+            ->with('success','You have successfully upload image.')
+            ->withSection("propriete")
+            ->withFoyer($foyer->id);
     }
 
     /**

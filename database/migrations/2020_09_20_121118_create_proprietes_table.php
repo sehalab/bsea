@@ -20,7 +20,6 @@ class CreateProprietesTable extends Migration
             $table->string('genre');
             $table->string('etatcivil');
             $table->string('numerocarte');
-            $table->string('statut');
             $table->string('photo');
             $table->unsignedBigInteger('foyer_id');
             $table->timestamps();

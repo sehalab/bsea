@@ -18,13 +18,12 @@ class CreateDetailsTable extends Migration
             $table->string('statut');
             $table->mediumInteger('duree');
             $table->unsignedBigInteger('propriete_id');
-            $table->unsignedBigInteger('proprio_id');
+            $table->unsignedBigInteger('proprio_id')->nullable();
             $table->timestamps();
         });
 
         Schema::table('details', function(Blueprint $table){
             $table->foreign('propriete_id')->references('id')->on('proprietes')->cascadeOnDelete();
-            $table->foreign('proprio_id')->references('id')->on('proprios')->cascadeOnDelete();
         });
     }
 

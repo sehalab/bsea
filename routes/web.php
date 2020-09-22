@@ -21,3 +21,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/foyer', 'FoyerController');
+Route::resource('/propriete', 'ProprieteController');
+Route::resource('/details', 'DetailsController');
