@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Propriete;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ProprieteController extends Controller
 {
@@ -24,7 +25,11 @@ class ProprieteController extends Controller
      */
     public function create()
     {
-        //
+        
+    }
+
+    public function getPropriete($id){
+        return view('propriete')->withFoyer($id);
     }
 
     /**
@@ -35,19 +40,23 @@ class ProprieteController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(), [
             'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'nom' => 'required',
             'postnom' => 'required|max:255|min:4',
-            'genre' => 'required|alpha_num|max:255|min:4',
-            'etatcivil' => 'required|alpha_num|max:255|min:4',
-            'numerocarte' => 'required|alpha_num|max:255|min:4',
+            'genre' => 'required|max:255|min:4',
+            'etatcivil' => 'required|max:255|min:4',
+            'numerocarte' => 'required|max:255|min:4',
         ], [
             'required' => 'Le :attribute est requis',
             'etatcivil.required' => "L' etat civil est requis",
             'between' => "la :attribute :input doit être entre :min - :max",
         ]
         );
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 500);
+        }
 
         $imageName = time() . '.' . request()->photo->getClientOriginalExtension();
 
@@ -63,9 +72,7 @@ class ProprieteController extends Controller
             'foyer_id' => $request->foyer_id,
         ]);
 
-        return view('details')
-            ->with('success', 'La propriété a été enregistrée avec succès.')
-            ->withPropriete($propriete->id);
+       return response()->json(['success' => 'Record is successfully added', 'foyer' => $propriete->id]);
 
     }
 

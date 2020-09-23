@@ -14,60 +14,40 @@
                 <h5 class="card-header info-color white-text text-center py-4">
                     <strong>Propriete</strong>
                 </h5>
-                <div class="card-body px-lg-5">
-                    <form method="POST" action="{{ route('propriete.store') }}" enctype="multipart/form-data" class="text-center" style="color: #757575;">
+                <div class="card-body px-lg-5 carde">
+                    <form method="POST" action="{{ route('propriete.store') }}" enctype="multipart/form-data" style="color: #757575;">
                         @csrf
                         <!-- Name -->
                         <div class="md-form mt-3">
-                            <input type="text" name="nom" id="nom" class="form-control  @error('nom') is-invalid @enderror" value="{{ @old('nom') }}">
+                            <input type="text" name="nom" id="nom" class="form-control champ">
                             <label for="nom">Nom</label>
-                            @error('nom')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                            <div class="invalid-feedback"></div>
                         </div>
 
                         <!-- E-mai -->
                         <div class="md-form">
-                            <input type="text" name="postnom" id="postnom" class="form-control  @error('postnom') is-invalid @enderror" value="{{ @old('postnom') }}">
+                            <input type="text" name="postnom" id="postnom" class="form-control champ">
                             <label for="postnom">Post nom</label>
-                            @error('postnom')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                            <div class="invalid-feedback"></div>
                         </div>
 
-                        <select class="mdb-select md-form @error('genre') is-invalid @enderror" value="{{ @old('genre') }}" name="genre">
+                        <select class="mdb-select md-form champ" name="genre">
                             <option value="" disabled selected>Selectionner genre</option>
                             <option value="homme">Homme</option>
                             <option value="femme">Femme</option>
                         </select>
-                        @error('genre')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                                    
+                        <div class="invalid-feedback"></div>
+
                         <div class="md-form">
-                            <input type="text" name="etatcivil" id="etatcivil" class="form-control  @error('etatcivil') is-invalid @enderror" value="{{ @old('etatcivil') }}">
+                            <input type="text" name="etatcivil" id="etatcivil" class="form-control champ">
                             <label for="etatcivil">Etat civil</label>
-                            @error('etatcivil')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                            <div class="invalid-feedback"></div>
                         </div>
 
                         <div class="md-form">
-                            <input type="text" name="numerocarte" id="numerocarte" class="form-control  @error('numerocarte') is-invalid @enderror" value="{{ @old('numerocarte') }}">
+                            <input type="text" name="numerocarte" id="numerocarte" class="form-control champ">
                             <label for="numerocarte">Numero carte Electeur</label>
-                            @error('numerocarte')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                            <div class="invalid-feedback"></div>
                         </div>
 
                         <div class="md-form">
@@ -77,12 +57,12 @@
                                     <input type="file" name="photo">
                                 </div>
                                 <div class="file-path-wrapper">
-                                    <input class="file-path validate" type="text" placeholder="photo">
+                                    <input class="file-path validate champ" type="text" placeholder="photo">
                                 </div>
                             </div>
                         </div>
                         
-                        <input type="hidden" name="foyer_id" value="{{ $foyer }}">
+                        <input type="hidden" next="detail" id="next" name="foyer_id" value="{{ $foyer }}">
                         <!-- Sign in button -->
                         <button type="submit" class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect" type="submit">Sign in</button>
                     </form>

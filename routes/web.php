@@ -25,3 +25,7 @@ Route::resource('/propriete', 'ProprieteController');
 Route::resource('/details', 'DetailsController');
 Route::resource('/structure', 'StructureController');
 Route::resource('/membre', 'MembreController');
+Route::get('/proprietes/{id}', 'ProprieteController@getPropriete');
+Route::get('/detail/{id}', 'DetailsController@getPropriete');
+Route::get('/structures/{id}', 'StructureController@getPropriete');
+Route::get('/membres/{id}', 'MembreController@getPropriete');

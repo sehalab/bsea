@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Foyer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class FoyerController extends Controller
 {
@@ -36,7 +37,7 @@ class FoyerController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(), [
             'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'numero' => 'required',
             'nom_village' => 'required|max:255|min:4',
@@ -49,6 +50,10 @@ class FoyerController extends Controller
             'between' => "la :attribute :input doit être entre :min - :max",
         ]
         );
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 500);
+        }
 
         $imageName = time() . '.' . request()->photo->getClientOriginalExtension();
 
@@ -63,9 +68,7 @@ class FoyerController extends Controller
             'user_id' => Auth::user()->id,
         ]);
 
-        return view('propriete')
-            ->with('success', 'You have successfully upload image.')
-            ->withFoyer($foyer->id);
+        return response()->json(['success' => 'Record is successfully added', 'foyer' => $foyer->id]);
     }
 
     /**

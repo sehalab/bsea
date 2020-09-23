@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Details;
 use App\Proprio;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class DetailsController extends Controller
 {
@@ -28,6 +29,10 @@ class DetailsController extends Controller
         //
     }
 
+    public function getPropriete($id){
+        return view('details')->withPropriete($id);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -38,6 +43,24 @@ class DetailsController extends Controller
     {
         $proprio = null;
         if (isset($request->nom, $request->prenom, $request->telephone, $request->adresse)) {
+            $validator = Validator::make($request->all(), [
+                'nom' => 'required',
+                'postnom' => 'required|max:255|min:4',
+                'adresse' => 'required|max:255|min:10',
+                'statut' => 'required|max:255|min:4',
+                'duree' => 'required|max:255|min:1',
+                ], [
+                    'required' => 'Le :attribute est requis',
+                    'adresse.required' => "L' :attribute est requise",
+                    'duree.required' => "La :attribute est requise",
+                    'between' => "la :attribute :input doit être entre :min - :max",
+                ]
+            );
+
+            if ($validator->fails()) {
+                return response()->json(['errors' => $validator->errors()], 500);
+            }
+
             $proprio = Proprio::create([
                 "nom" => $request->nom,
                 "prenom" => $request->prenom,
@@ -53,6 +76,21 @@ class DetailsController extends Controller
             ]);
 
         } else {
+            $validator = Validator::make($request->all(), [
+                'statut' => 'required|max:255|min:4',
+                'duree' => 'required|max:255|min:1',
+                ], [
+                    'required' => 'Le :attribute est requis',
+                    'adresse.required' => "L' :attribute est requise",
+                    'duree.required' => "La :attribute est requise",
+                    'between' => "la :attribute :input doit être entre :min - :max",
+                ]
+            );
+
+            if ($validator->fails()) {
+                return response()->json(['errors' => $validator->errors()], 500);
+            }
+
             Details::create([
                 "statut" => $request->statut,
                 "duree" => $request->duree,
@@ -61,9 +99,7 @@ class DetailsController extends Controller
             ]);
         }
 
-        return view('structure')
-            ->with('success', 'You have successfully upload image.')
-            ->withPropriete($request->propriete_id);
+        return response()->json(['success' => 'Record is successfully added', 'foyer' => $request->propriete_id]);
 
     }
 

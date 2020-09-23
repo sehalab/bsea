@@ -38,6 +38,10 @@ class SiteController extends Controller
         //
     }
 
+    public function getPropriete($id){
+        return view('site')->withPropriete($id);
+    }
+
     /**
      * Display the specified resource.
      *

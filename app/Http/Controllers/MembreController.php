@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Membre;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class MembreController extends Controller
 {
@@ -27,6 +28,10 @@ class MembreController extends Controller
         //
     }
 
+    public function getPropriete($id){
+        return view('membre')->withPropriete($id);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -35,10 +40,34 @@ class MembreController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+                'nomcomplet' => 'required|max:255|min:4',
+                'relation' => 'required|max:255|min:4',
+                'genre' => 'required|max:255|min:4',
+                'age' => 'required|alpha_num|max:255|min:1',
+                'niveauetudes' => 'required|max:255|min:4',
+                'occupation' => 'required|max:255|min:4',
+                'vulnerabilite' => 'required|max:255|min:4',
+                'ecole' => 'required|max:255|min:4',
+                'etatcivil' => 'required|max:255|min:4',
+            ],
+            [
+                'required' => 'La :attribute est requise',
+                'relation.required' => 'La :attribute est requise',
+                'vulnerabilite.required' => 'Les :attribute  est requise',
+                'ecole.required' => "L' :attribute  est requise",
+                'etatcivil.required' => "L' :attribute  est requis",
+                'between' => "la :attribute :input doit être entre :min - :max",
+            ]   
+        );
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 500);
+        }
+
         Membre::create($request->except("_token"));
-        return view('tombes')
-            ->with('success', 'Le membre a été bien enregistrée.')
-            ->withPropriete($request->propriete_id);
+
+        return response()->json(['success' => 'Record is successfully added', 'foyer' => $request->propriete_id]);
 
     }
 

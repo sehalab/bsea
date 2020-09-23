@@ -14,58 +14,67 @@
                 <h5 class="card-header info-color white-text text-center py-4">
                     <strong>Membre</strong>
                 </h5>                        
-                <div class="card-body px-lg-5">
-                    <form method="POST" action="{{ route('membre.store') }}" enctype="multipart/form-data" class="text-center" style="color: #757575;">
+                <div class="card-body px-lg-5 carde">
+                    <form method="POST" action="{{ route('membre.store') }}" enctype="multipart/form-data"  style="color: #757575;">
                         @csrf
                         <!-- Name -->
                         <div class="md-form mt-3">
-                            <input type="text" name="nomcomplet" id="nomcomplet" class="form-control">
+                            <input type="text" name="nomcomplet" id="nomcomplet" class="form-control champ">
                             <label for="nomcomplet">Nom complet</label>
+                            <div class="invalid-feedback"></div>
                         </div>
 
                         <!-- E-mai -->
                         <div class="md-form">
-                            <input type="text" name="relation" id="relation" class="form-control">
+                            <input type="text" name="relation" id="relation" class="form-control champ">
                             <label for="relation">Relation</label>
+                            <div class="invalid-feedback"></div>
                         </div>
 
-                        <select class="mdb-select md-form" name="genre">
+                        <select class="mdb-select md-form champ" name="genre">
                             <option value="" disabled selected>Selectionner genre</option>
                             <option value="homme">Homme</option>
                             <option value="femme">Femme</option>
                         </select>
+                        <div class="invalid-feedback"></div>
 
                         <div class="md-form">
-                            <input type="number" name="age" id="age" class="form-control">
+                            <input type="number" name="age" id="age" class="form-control champ">
                             <label for="age">Relation</label>
+                            <div class="invalid-feedback"></div>
                         </div>
 
                         <div class="md-form">
-                            <input type="text" name="niveauetudes" id="niveauetudes" class="form-control">
+                            <input type="text" name="niveauetudes" id="niveauetudes" class="form-control champ">
                             <label for="niveauetudes">Niveau Etudes</label>
+                            <div class="invalid-feedback"></div>
                         </div>
 
                         <div class="md-form">
-                            <input type="text" name="occupation" id="occupation" class="form-control">
+                            <input type="text" name="occupation" id="occupation" class="form-control champ">
                             <label for="occupation">Occupation</label>
+                            <div class="invalid-feedback"></div>
                         </div>
 
                         <div class="md-form">
-                            <input type="text" name="vulnerabilite" id="vulnerabilite" class="form-control">
+                            <input type="text" name="vulnerabilite" id="vulnerabilite" class="form-control champ">
                             <label for="vulnerabilite">Vulnerabilite</label>
+                            <div class="invalid-feedback"></div>
                         </div>
 
                         <div class="md-form">
-                            <input type="text" name="ecole" id="ecole" class="form-control">
+                            <input type="text" name="ecole" id="ecole" class="form-control champ">
                             <label for="ecole">Ecole</label>
+                            <div class="invalid-feedback"></div>
                         </div>
 
                         <div class="md-form">
-                            <input type="text" name="etatcivil" id="etatcivil" class="form-control">
+                            <input type="text" name="etatcivil" id="etatcivil" class="form-control champ">
                             <label for="etatcivil">Etat Civil</label>
+                            <div class="invalid-feedback"></div>
                         </div>
-
-                        <input type="hidden" name="propriete_id" value="{{ $propriete }}">
+ 
+                        <input type="hidden" id="next" nex="tombes" name="propriete_id" value="{{ $propriete }}">
                             <!-- Sign in button -->
                         <button type="submit" class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect" type="submit">Sign in</button>
                     </form>

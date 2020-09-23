@@ -23,9 +23,19 @@
     <!-- Stepper CSS - minified-->
     <link href="/css/addons-pro/stepper.min.css" rel="stylesheet">
     <link href="/css/style.min.css" rel="stylesheet">
-</head>
+    <link href="/css/styleplk.css" rel="stylesheet">
+</head
 <body>
     <div id="app">
+        <div class="loading-wrapper">
+            <div class="loading">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -89,6 +99,7 @@
     <script type="text/javascript" src="/js/bootstrap.min.js"></script>
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="/js/mdb.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.blockUI.js"></script>
     <!-- Initializations -->
     <script type="text/javascript" src="/js/addons-pro/stepper.js"></script>
     <!-- Stepper JavaScript - minified -->
@@ -127,6 +138,42 @@
                     });
                 }
             })
+        });
+
+        $(document).ready(function() {
+            $(".loading-wrapper").hide();
+            $("form").submit(function(e) {
+                e.preventDefault();
+                $('.champ + label +div').text('');
+                $('.champ').removeClass('is-invalid');
+                var next = $("#next").attr('next');
+                var fd = new FormData();
+
+                $.ajax({
+                    type: $(this).attr('method'),
+                    url: $(this).attr('action'),
+                    data: new FormData(this),
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    beforeSend: function(){
+                        $('div.carde').block({ message: $('.loading-wrapper') });
+                    },
+                    success: function(response) {
+                        toastr.success(response.success);
+                        var foyer = response.foyer;
+                        location.href="../"+next+"/"+foyer;
+                    },
+                    error: function(data) {
+                        $.each(data.responseJSON.errors, function(key, value) {
+                            var input = 'form .champ[name=' + key + ']';
+                            $(input).addClass('is-invalid');
+                            $(input + " + label + div").html(value[0]);
+                            $('div.carde').unblock();
+                        });
+                    }
+                });
+            });
         });
     </script>
 </body>

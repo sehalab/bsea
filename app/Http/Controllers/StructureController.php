@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Structure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class StructureController extends Controller
 {
@@ -27,6 +28,10 @@ class StructureController extends Controller
         //
     }
 
+    public function getPropriete($id){
+        return view('structure')->withPropriete($id);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -35,9 +40,23 @@ class StructureController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+       $validator = Validator::make($request->all(), [
+                'materiaux' => 'required|max:255|min:4',
+                'longueur' => 'required|alpha_num|max:255|min:1',
+                'largeur' => 'required|alpha_num|max:255|min:1',
+                'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ],
+            [
+                'required' => 'La :attribute est requise',
+                'numero.required' => 'Le numero est requis',
+                'materiaux.required' => 'Les :attribute du village est requise',
+                'between' => "la :attribute :input doit être entre :min - :max",
+            ]   
+        );
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 500);
+        }
 
         $imageName = time() . '.' . request()->photo->getClientOriginalExtension();
 
@@ -51,10 +70,7 @@ class StructureController extends Controller
             "propriete_id" => $request->propriete_id,
         ]);
 
-        return view('home')
-            ->with('success', 'La structure a été bien enregistrée.')
-            ->withSection("membres")
-            ->withPropriete($request->propriete_id);
+        return response()->json(['success' => 'Record is successfully added', 'foyer' => $request->propriete_id]);
 
     }
 
