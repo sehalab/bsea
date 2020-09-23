@@ -27,6 +27,11 @@ class TombeController extends Controller
         //
     }
 
+    public function getPropriete($id)
+    {
+        return view('structure')->withPropriete($id);
+    }
+
     /**
      * Store a newly created resource in storage.
      *

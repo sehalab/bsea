@@ -51,11 +51,11 @@
                                     <input class="file-path validate champ" type="text" placeholder="photo">
                                 </div>
                             </div>
-                            
-                            <div class="valid-feedback"></div>
-                            
+                            <div class="invalid-feedback"></div>
+
                         </div>
                         <!-- Sign in button -->
+                        <input type="hidden" id="next" next="proprietes" name="next">
                         <button type="submit" class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect" type="submit">Sign in</button>
                     </form>
                 </div>

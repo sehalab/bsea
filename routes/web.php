@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
  */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view("auth.login");
 });
 
 Auth::routes();
@@ -29,3 +29,4 @@ Route::get('/proprietes/{id}', 'ProprieteController@getPropriete');
 Route::get('/detail/{id}', 'DetailsController@getPropriete');
 Route::get('/structures/{id}', 'StructureController@getPropriete');
 Route::get('/membres/{id}', 'MembreController@getPropriete');
+Route::get('/tombes/{id}', 'TombeController@getPropriete');

@@ -13,7 +13,7 @@
             <div class="card">
                 <h5 class="card-header info-color white-text text-center py-4">
                     <strong>Membre</strong>
-                </h5>                        
+                </h5>
                 <div class="card-body px-lg-5 carde">
                     <form method="POST" action="{{ route('membre.store') }}" enctype="multipart/form-data"  style="color: #757575;">
                         @csrf
@@ -73,8 +73,8 @@
                             <label for="etatcivil">Etat Civil</label>
                             <div class="invalid-feedback"></div>
                         </div>
- 
-                        <input type="hidden" id="next" nex="tombes" name="propriete_id" value="{{ $propriete }}">
+
+                        <input type="hidden" id="next" next="tombes" name="propriete_id" value="{{ $propriete }}">
                             <!-- Sign in button -->
                         <button type="submit" class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect" type="submit">Sign in</button>
                     </form>

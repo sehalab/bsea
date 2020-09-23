@@ -24,8 +24,8 @@
     <link href="/css/addons-pro/stepper.min.css" rel="stylesheet">
     <link href="/css/style.min.css" rel="stylesheet">
     <link href="/css/styleplk.css" rel="stylesheet">
-</head
-<body>
+</head>
+<body class="fixed-sn light-blue-skin">
     <div id="app">
         <div class="loading-wrapper">
             <div class="loading">
@@ -36,56 +36,83 @@
                 <span></span>
             </div>
         </div>
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+          <!-- Navbar -->
+        <header>
+            <!-- Sidebar navigation -->
+            <div id="slide-out" class="side-nav sn-bg-4 fixed">
+                <ul class="custom-scrollbar">
+                    <!-- Logo -->
+                    <li>
+                        <div class="logo-wrapper waves-light">
+                            <a href="#"><img src="public/img/mdb-transparent.png" class="img-fluid flex-center" alt="tester"></a>
+                        </div>
+                    </li>
+                    <!--/. Logo -->
+                    <!-- Side navigation links -->
+                    <li>
+                        <ul class="collapsible collapsible-accordion">
+                            <li>
+                                <a class="collapsible-header waves-effect" href="index.php">
+                                    <i class="fas fa-home"></i> Dashboard
+                                </a>
                             </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+
+                            <li>
+                                <a class="collapsible-header waves-effect" href="articles">
+                                    <i class="fas fa-database"></i> datas
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--/. Side navigation links -->
+                </ul>
+                <div class="light-blue-skin mask-strong"></div>
+            </div>
+            <nav class="navbar fixed-top navbar-toggleable-md navbar-expand-lg scrolling-navbar double-nav light-blue-skin">
+                <!-- SideNav slide-out button -->
+                <div class="float-left">
+                    <a href="#" data-activates="slide-out" class="button-collapse"><i class="fas fa-bars"></i></a>
+                </div>
+                <!-- Breadcrumb-->
+                <div class="breadcrumb-dn mr-auto">
+                    <p>tester</p>
+                </div>
+                <!-- Right Side Of Navbar -->
+                <ul class="nav navbar-nav nav-flex-icons ml-auto">
+                    <!-- Authentication Links -->
+                    @guest
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                    </li>
+                    @if (Route::has('register'))
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                        </li>
+                    @endif
+                    @else
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ Auth::user()->name }}
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
+                    @endguest
+                </ul>
+            </nav>
+            <!-- /.Navbar -->
+        </header>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
         <main class="mt-5 pt-5">
             <div class="container">
                     @yield('content')
@@ -104,6 +131,9 @@
     <script type="text/javascript" src="/js/addons-pro/stepper.js"></script>
     <!-- Stepper JavaScript - minified -->
     <script type="text/javascript" src="/js/addons-pro/stepper.min.js"></script>
+    <script type="text/javascript" src="/js/addons/datatables.min.js"></script>
+    <script type="text/javascript" src="/js/addons/datatables-select.js"></script>
+    <script src="/js/datable.js" type="text/javascript"></script>
     <script type="text/javascript">
         // Animations initialization
         new WOW().init();
@@ -175,6 +205,18 @@
                 });
             });
         });
+    </script>
+    <script>
+        new WOW().init();
+        // SideNav Button Initialization
+        $(".button-collapse").sideNav();
+            // SideNav Scrollbar Initialization
+        var sideNavScrollbar = document.querySelector(".custom-scrollbar");
+        Ps.initialize(sideNavScrollbar);
+    </script>
+    <script>
+        $("#dt-less-columns").mdbEditor();
+        $(".dataTables_length").addClass("bs-select");
     </script>
 </body>
 </html>
