@@ -15,7 +15,7 @@ class FoyerController extends Controller
      */
     public function index()
     {
-        //
+        return view('home');
     }
 
     /**
@@ -37,37 +37,34 @@ class FoyerController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-                'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                'numero' => 'required',
-                'nom_village' => 'required|max:255|min:4',
-                'latitude' => 'required|alpha_num|max:255|min:4',
-                'longitude' => 'required|alpha_num|max:255|min:4',
-            ],[
-                'required' => 'La :attribute est requise',
-                'numero.required' => 'Le numero est requis',
-                'nom_village.required' => 'Le nom du village est requise',
-                'between' => "la :attribute :input doit être entre :min - :max",
-            ]
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'numero' => 'required',
+            'nom_village' => 'required|max:255|min:4',
+            'latitude' => 'required|alpha_num|max:255|min:4',
+            'longitude' => 'required|alpha_num|max:255|min:4',
+        ], [
+            'required' => 'La :attribute est requise',
+            'numero.required' => 'Le numero est requis',
+            'nom_village.required' => 'Le nom du village est requise',
+            'between' => "la :attribute :input doit être entre :min - :max",
+        ]
         );
 
-
-        $imageName = time().'.'.request()->photo->getClientOriginalExtension();
+        $imageName = time() . '.' . request()->photo->getClientOriginalExtension();
 
         $request->photo->move(public_path('images'), $imageName);
-
 
         $foyer = Foyer::create([
             'numero' => $request->numero,
             'nom_village' => $request->nom_village,
             'photo' => $imageName,
-            'latitude'=>$request->latitude,
-            'longitude'=>$request->longitude,
+            'latitude' => $request->latitude,
+            'longitude' => $request->longitude,
             'user_id' => Auth::user()->id,
         ]);
 
-        return view('home')
-            ->with('success','You have successfully upload image.')
-            ->withSection("propriete")
+        return view('propriete')
+            ->with('success', 'You have successfully upload image.')
             ->withFoyer($foyer->id);
     }
 

@@ -14,7 +14,7 @@ class ProprieteController extends Controller
      */
     public function index()
     {
-        //
+        return view('propriete');
     }
 
     /**
@@ -36,17 +36,17 @@ class ProprieteController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-                'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                'nom' => 'required',
-                'postnom' => 'required|max:255|min:4',
-                'genre' => 'required|alpha_num|max:255|min:4',
-                'etatcivil' => 'required|alpha_num|max:255|min:4',
-                'numerocarte' => 'required|alpha_num|max:255|min:4',
-            ], [
-                'required' => 'Le :attribute est requis',
-                'etatcivil.required' => "L' etat civil est requis",
-                'between' => "la :attribute :input doit être entre :min - :max",
-            ]
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'nom' => 'required',
+            'postnom' => 'required|max:255|min:4',
+            'genre' => 'required|alpha_num|max:255|min:4',
+            'etatcivil' => 'required|alpha_num|max:255|min:4',
+            'numerocarte' => 'required|alpha_num|max:255|min:4',
+        ], [
+            'required' => 'Le :attribute est requis',
+            'etatcivil.required' => "L' etat civil est requis",
+            'between' => "la :attribute :input doit être entre :min - :max",
+        ]
         );
 
         $imageName = time() . '.' . request()->photo->getClientOriginalExtension();
@@ -63,9 +63,8 @@ class ProprieteController extends Controller
             'foyer_id' => $request->foyer_id,
         ]);
 
-        return view('home')
-            ->with('success', 'You have successfully upload image.')
-            ->withSection("details")
+        return view('details')
+            ->with('success', 'La propriété a été enregistrée avec succès.')
             ->withPropriete($propriete->id);
 
     }

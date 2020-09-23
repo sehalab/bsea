@@ -14,7 +14,7 @@ class MembreController extends Controller
      */
     public function index()
     {
-        //
+        return view('membre');
     }
 
     /**
@@ -36,9 +36,8 @@ class MembreController extends Controller
     public function store(Request $request)
     {
         Membre::create($request->except("_token"));
-        return view('home')
+        return view('tombes')
             ->with('success', 'Le membre a été bien enregistrée.')
-            ->withSection("tombes")
             ->withPropriete($request->propriete_id);
 
     }

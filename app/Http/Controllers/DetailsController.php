@@ -15,7 +15,7 @@ class DetailsController extends Controller
      */
     public function index()
     {
-        //
+        return view('details');
     }
 
     /**
@@ -61,9 +61,8 @@ class DetailsController extends Controller
             ]);
         }
 
-        return view('home')
+        return view('structure')
             ->with('success', 'You have successfully upload image.')
-            ->withSection("structure")
             ->withPropriete($request->propriete_id);
 
     }
