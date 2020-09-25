@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Site;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class SiteController extends Controller
 {
@@ -35,11 +36,41 @@ class SiteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+                'description' => 'required|max:255|min:4',
+                'local_N' => 'required|alpha_num|max:255|min:4',
+                'local_E' => 'required|alpha_num|max:255|min:4',
+                'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ],
+            [
+                'required' => 'La :attribute est requise',
+                'between' => "la :attribute :input doit être entre :min - :max",
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 500);
+        }
+
+        $imageName = time() . '.' . request()->photo->getClientOriginalExtension();
+
+        $request->photo->move(public_path('images'), $imageName);
+
+        Site::create([
+            "refphoto" => $imageName,
+            "local_N" => $request->local_N,
+            "local_E" => $request->local_E,
+            "description" => $request->description,
+            "etat" => ($request->etat)?true:false,
+            "foyer_id" => $request->foyer_id,
+        ]);
+
+        return response()->json(['success' => 'Record is successfully added', 'foyer' => $request->foyer_id]);
     }
 
+
     public function getPropriete($id){
-        return view('site')->withPropriete($id);
+        return view('sites')->withPropriete($id);
     }
 
     /**

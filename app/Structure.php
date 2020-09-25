@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Structure extends Model
 {
     protected $fillable = [
-        "photo", "longueur", "largeur", "materiaux", "propriete_id",
+        "photo", "longueur", "largeur", "materiaux", "foyer_id",
     ];
 }

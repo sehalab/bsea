@@ -10,7 +10,6 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
     <link href="/css/fontawesome-all.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/font-awesome.min.css">
     <!-- Fonts -->
@@ -44,7 +43,7 @@
                     <!-- Logo -->
                     <li>
                         <div class="logo-wrapper waves-light">
-                            <a href="#"><img src="public/img/mdb-transparent.png" class="img-fluid flex-center" alt="tester"></a>
+                            <a href="#"><img src="/img/mdb-transparent.png" class="img-fluid flex-center" alt="tester"></a>
                         </div>
                     </li>
                     <!--/. Logo -->
@@ -58,7 +57,7 @@
                             </li>
 
                             <li>
-                                <a class="collapsible-header waves-effect" href="articles">
+                                <a class="collapsible-header waves-effect" href="{{ route('foyer.index') }}">
                                     <i class="fas fa-database"></i> datas
                                 </a>
                             </li>
@@ -147,17 +146,25 @@
         $(document).ready(function() {
         $('.mdb-select').materialSelect();
         });
+
+        $("#dt-more-columns").mdbEditor();
+        $(".dataTables_length").addClass("bs-select");
+
     </script>
     <script>
-        $(document).ready(function ()
+        function someFunction() {
+            setTimeout(function () 
+            {
+                $('#feedback-step').nextStep();
+            }, 2000);
+        }
+
+        $(document).ready(function () 
         {
             $('.stepper').mdbStepper();
         })
-        function someFunction21() {
-            setTimeout(function () {
-                $('#horizontal-stepper').nextStep();
-            }, 2000);
-        }
+    </script>
+    <script>
         $(document).ready(function(){
             $('.select').change(function(e){
                 if($(this).val() === "proprio"){
@@ -169,6 +176,7 @@
                 }
             })
         });
+        $(".loading-wrapper").hide();
 
         $(document).ready(function() {
             $(".loading-wrapper").hide();
@@ -178,7 +186,7 @@
                 $('.champ').removeClass('is-invalid');
                 var next = $("#next").attr('next');
                 var fd = new FormData();
-
+                console.log(fd);
                 $.ajax({
                     type: $(this).attr('method'),
                     url: $(this).attr('action'),
@@ -213,6 +221,12 @@
             // SideNav Scrollbar Initialization
         var sideNavScrollbar = document.querySelector(".custom-scrollbar");
         Ps.initialize(sideNavScrollbar);
+
+        $('#dtBasicExample-1').mdbEditor({
+            rowEditor: true
+        });
+
+        $('.dataTables_length').addClass('bs-select');
     </script>
     <script>
         $("#dt-less-columns").mdbEditor();

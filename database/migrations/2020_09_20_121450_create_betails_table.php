@@ -16,12 +16,12 @@ class CreateBetailsTable extends Migration
         Schema::create('betails', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
-            $table->unsignedBigInteger('propriete_id');
+            $table->unsignedBigInteger('foyer_id');
             $table->timestamps();
         });
 
         Schema::table('betails', function(Blueprint $table){
-            $table->foreign('propriete_id')->references('id')->on('proprietes')->cascadeOnDelete();
+            $table->foreign('foyer_id')->references('id')->on('foyers')->cascadeOnDelete();
         });
     }
 

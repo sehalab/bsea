@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Arbre;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Validator;
 class ArbreController extends Controller
 {
     /**
@@ -15,6 +15,11 @@ class ArbreController extends Controller
     public function index()
     {
         //
+    }
+
+
+    public function getPropriete($id){
+        return view('arbres')->withPropriete($id);
     }
 
     /**
@@ -35,7 +40,27 @@ class ArbreController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+                'nom' => 'required|max:255|min:4',
+                'usage' => 'required|max:255|min:4',
+            ],
+            [
+                'required' => 'La :attribute est requise',
+                'between' => "la :attribute :input doit être entre :min - :max",
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 500);
+        }
+
+        Arbre::create([
+            "nom"=>$request->nom,
+            "usage"=>$request->usage,
+            "foyer_id"=>$request->foyer_id,
+        ]);
+
+        return response()->json(['success' => 'Record is successfully added', 'foyer' => $request->foyer_id]);
     }
 
     /**

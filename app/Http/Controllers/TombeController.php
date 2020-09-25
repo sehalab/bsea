@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Tombe;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Validator;
+
 use Illuminate\Http\Request;
 
 class TombeController extends Controller
@@ -29,7 +32,7 @@ class TombeController extends Controller
 
     public function getPropriete($id)
     {
-        return view('structure')->withPropriete($id);
+        return view('tombes')->withPropriete($id);
     }
 
     /**
@@ -40,7 +43,41 @@ class TombeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+                'lienparente' => 'required|max:255|min:4',
+                'local_N' => 'required|alpha_num|max:255|min:4',
+                'local_E' => 'required|alpha_num|max:255|min:4',
+                'annee' => 'required|alpha_num|max:255|min:4',
+                'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ],
+            [
+                'required' => 'La :attribute est requise',
+                'annee.required' => "L' :attribute est requis",
+                'lienparente.required' => 'Le champs lien de parenté est requis',
+                'between' => "la :attribute :input doit être entre :min - :max",
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 500);
+        }
+
+        $imageName = time() . '.' . request()->photo->getClientOriginalExtension();
+
+        $request->photo->move(public_path('images'), $imageName);
+
+        Tombe::create([
+            "refphoto" => $imageName,
+            "heure" =>  Carbon::now(),
+            "annee" =>  $request->annee,
+            "local_N" => $request->local_N,
+            "local_E" => $request->local_E,
+            "lienparente" => $request->lienparente,
+            "foyer_id" => $request->foyer_id,
+        ]);
+
+        return response()->json(['success' => 'Record is successfully added', 'foyer' => $request->foyer_id]);
+
     }
 
     /**

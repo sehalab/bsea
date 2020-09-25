@@ -21,6 +21,15 @@ class CreateFoyersTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('latitude');
             $table->string('longitude');
+            $table->string('nom');
+            $table->string('postnom');
+            $table->string('genre');
+            $table->string('etatcivil');
+            $table->string('numerocarte');
+            $table->string('photo_propriete');
+            $table->string('statut');
+            $table->mediumInteger('duree');
+            $table->unsignedBigInteger('proprio_id')->nullable();
             $table->timestamps();
         });
 

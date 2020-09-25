@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Betails;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class BetailsController extends Controller
 {
@@ -35,7 +36,26 @@ class BetailsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+                'nom' => 'required|max:255|min:4',
+            ],
+            [
+                'required' => 'La :attribute est requise',
+                'between' => "la :attribute :input doit être entre :min - :max",
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 500);
+        }
+
+        Betails::create([
+            "nom"=>$request->nom,
+            "foyer_id"=>$request->foyer_id,
+        ]);
+
+        return response()->json(['success' => 'Record is successfully added', 'foyer' => $request->foyer_id]);
+
     }
 
     /**
@@ -70,6 +90,10 @@ class BetailsController extends Controller
     public function update(Request $request, Betails $betails)
     {
         //
+    }
+
+    public function getPropriete($id){
+        return view('betails')->withPropriete($id);
     }
 
     /**

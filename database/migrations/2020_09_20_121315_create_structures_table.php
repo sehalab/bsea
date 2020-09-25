@@ -19,12 +19,12 @@ class CreateStructuresTable extends Migration
             $table->mediumInteger('longueur');
             $table->mediumInteger('largeur');
             $table->string('materiaux');
-            $table->unsignedBigInteger('propriete_id');
+            $table->unsignedBigInteger('foyer_id');
             $table->timestamps();
         });
 
         Schema::table('structures', function(Blueprint $table){
-            $table->foreign('propriete_id')->references('id')->on('proprietes')->cascadeOnDelete();
+            $table->foreign('foyer_id')->references('id')->on('foyers')->cascadeOnDelete();
         });
     }
 

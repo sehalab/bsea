@@ -67,7 +67,7 @@ class StructureController extends Controller
             "longueur" => $request->longueur,
             "largeur" => $request->largeur,
             "materiaux" => $request->materiaux,
-            "propriete_id" => $request->propriete_id,
+            "foyer_id" => $request->propriete_id,
         ]);
 
         return response()->json(['success' => 'Record is successfully added', 'foyer' => $request->propriete_id]);
