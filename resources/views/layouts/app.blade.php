@@ -153,13 +153,13 @@
     </script>
     <script>
         function someFunction() {
-            setTimeout(function () 
+            setTimeout(function ()
             {
                 $('#feedback-step').nextStep();
             }, 2000);
         }
 
-        $(document).ready(function () 
+        $(document).ready(function ()
         {
             $('.stepper').mdbStepper();
         })
@@ -231,6 +231,86 @@
     <script>
         $("#dt-less-columns").mdbEditor();
         $(".dataTables_length").addClass("bs-select");
+    </script>
+    <script>
+        $(document).ready(function () {
+            $(".edit").click(function (e) {
+                e.preventDefault();
+                console.log($(this).parent().parent().siblings());
+                $(this).parent().parent().attr('id', 'actions');
+                $(this).parent().parent().siblings().addClass('editable');
+
+                var id = $(this).attr("val");
+                var link = $(this).attr("href");
+                var token = $(this).attr('token');
+                var method = $(this).attr('method');
+
+                 $(".editable").each(function(index, element) {
+                    if ($(this).hasClass("selectable")) {
+                        var selection = $("#selection").html();
+                        $(this).html(selection);
+                    } else if ($(this).hasClass("state")) {
+                        var states = "<select class='form-control fillable'><option value='1'>Deplacable</option><option value='0'>Statique</option></select>";
+                        $(this).html(states);
+                    } else {
+                        var val = $.trim($(this).text());
+                        $(this).html("<input type='text' class='form-control fillable' value='" + val + "' id='field" + index + "'>");
+                    }
+
+                });
+
+                $(this).hide();
+                $("#delete").hide();
+                $('#actions').html('<a id="save"></a>');
+                $("#save").addClass('btn btn-outline-info btn-sm m-0 waves-effect');
+                $("#save").html('<i class="fa fa-check" aria-hidden="true"></i>');
+
+                $('#save').click(function (e) {
+                    e.preventDefault();
+                    var fields = [];
+                    var reponse = {};
+
+                    $(".form-control").each(function (index, element) {
+                        fields.push($(this).val());
+                    });
+
+                    var errors = 0;
+                    $(".fillable").each(function(index, element) {
+                        if ($(this).val() == "") {
+                            $(this).addClass("is-invalid");
+                            errors++;
+                        } else fields.push($(this).val());
+                    });
+
+                    if (errors > 0) {
+                        toastr.warning("Veuillez completer tous les champs", 'Erreur', { "progressBar": true });
+                        fields = [];
+                    } else {
+                        $.post(link, {
+                                id: id,
+                                _token: token,
+                                _method: method,
+                                champs: fields
+                            },
+                            function(data, textStatus, jqXHR) {
+                                if (jqXHR.done()) {
+                                    if (data === "ok") {
+                                        toastr.success('Element modifié avec succè!', 'Succès', { "progressBar": true });
+                                        setTimeout(() => {
+                                            location.reload(true);
+                                        }, 1500);
+                                    } else toastr.warning('Echec veuillez réesayer', 'Succès', { "progressBar": true });
+                                    console.log(data)
+                                } else toastr.warning(textStatus, 'Erreur', { "progressBar": true });
+
+                            }
+                        );
+                    }
+                    console.info(fields);
+                });
+
+            });
+        });
     </script>
 </body>
 </html>

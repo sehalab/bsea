@@ -21,16 +21,12 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/foyer', 'FoyerController');
-Route::resource('/propriete', 'ProprieteController');
-Route::resource('/details', 'DetailsController');
 Route::resource('/structure', 'StructureController');
 Route::resource('/membre', 'MembreController');
 Route::resource('/tombe', 'TombeController');
 Route::resource('/betail', 'BetailsController');
 Route::resource('/arbre', 'ArbreController');
 Route::resource('/site', 'SiteController');
-Route::get('/proprietes/{id}', 'ProprieteController@getPropriete');
-Route::get('/detail/{id}', 'DetailsController@getPropriete');
 Route::get('/structures/{id}', 'StructureController@getPropriete');
 Route::get('/membres/{id}', 'MembreController@getPropriete');
 Route::get('/tombes/{id}', 'TombeController@getPropriete');

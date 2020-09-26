@@ -28,7 +28,8 @@ class MembreController extends Controller
         //
     }
 
-    public function getPropriete($id){
+    public function getPropriete($id)
+    {
         return view('membre')->withPropriete($id);
     }
 
@@ -41,16 +42,16 @@ class MembreController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-                'nomcomplet' => 'required|max:255|min:4',
-                'relation' => 'required|max:255|min:4',
-                'genre' => 'required|max:255|min:4',
-                'age' => 'required|alpha_num|max:255|min:1',
-                'niveauetudes' => 'required|max:255|min:4',
-                'occupation' => 'required|max:255|min:4',
-                'vulnerabilite' => 'required|max:255|min:4',
-                'ecole' => 'required|max:255|min:4',
-                'etatcivil' => 'required|max:255|min:4',
-            ],
+            'nomcomplet' => 'required|max:255|min:4',
+            'relation' => 'required|max:255|min:4',
+            'genre' => 'required|max:255|min:4',
+            'age' => 'required|alpha_num|max:255|min:1',
+            'niveauetudes' => 'required|max:255|min:4',
+            'occupation' => 'required|max:255|min:4',
+            'vulnerabilite' => 'required|max:255|min:4',
+            'ecole' => 'required|max:255|min:4',
+            'etatcivil' => 'required|max:255|min:4',
+        ],
             [
                 'required' => 'La :attribute est requise',
                 'relation.required' => 'La :attribute est requise',
@@ -58,7 +59,7 @@ class MembreController extends Controller
                 'ecole.required' => "L' :attribute  est requise",
                 'etatcivil.required' => "L' :attribute  est requis",
                 'between' => "la :attribute :input doit être entre :min - :max",
-            ]   
+            ]
         );
 
         if ($validator->fails()) {
@@ -102,7 +103,17 @@ class MembreController extends Controller
      */
     public function update(Request $request, Membre $membre)
     {
-        //
+        $membre->update([
+            'nomcomplet' => $request->champs[1],
+            'relation' => $request->champs[2],
+            'genre' => $request->champs[3],
+            'age' => $request->champs[4],
+            'niveauetudes' => $request->champs[5],
+            'ecole' => $request->champs[6],
+            'vulnerabilite' => $request->champs[7],
+            'etatcivil' => $request->champs[8],
+        ]);
+        return "ok";
     }
 
     /**

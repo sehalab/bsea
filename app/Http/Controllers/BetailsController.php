@@ -37,8 +37,8 @@ class BetailsController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-                'nom' => 'required|max:255|min:4',
-            ],
+            'nom' => 'required|max:255|min:4',
+        ],
             [
                 'required' => 'La :attribute est requise',
                 'between' => "la :attribute :input doit être entre :min - :max",
@@ -50,8 +50,8 @@ class BetailsController extends Controller
         }
 
         Betails::create([
-            "nom"=>$request->nom,
-            "foyer_id"=>$request->foyer_id,
+            "nom" => $request->nom,
+            "foyer_id" => $request->foyer_id,
         ]);
 
         return response()->json(['success' => 'Record is successfully added', 'foyer' => $request->foyer_id]);
@@ -89,10 +89,15 @@ class BetailsController extends Controller
      */
     public function update(Request $request, Betails $betails)
     {
-        //
+        $betails->update([
+            "nom" => $request->champs[1],
+        ]);
+        return "ok";
+
     }
 
-    public function getPropriete($id){
+    public function getPropriete($id)
+    {
         return view('betails')->withPropriete($id);
     }
 

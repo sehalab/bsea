@@ -160,27 +160,12 @@
     <table id="dt-more-columns" class="table table-striped table-bordered" cellspacing="0" width="100%">
         <thead>
             <tr>
-                <th class="th-sm">Name
-
-                </th>
-                <th class="th-sm">Position
-
-                </th>
-                <th class="th-sm">Office
-
-                </th>
-                <th class="th-sm">Age
-
-                </th>
-                <th class="th-sm">Start date
-
-                </th>
-                <th class="th-sm">Salary
-
-                </th>
-                <th class="th-sm">Example
-
-                </th>
+                <th class="th-sm">Code</th>
+                <th class="th-sm">Nom village</th>
+                <th class="th-sm">Latitude</th>
+                <th class="th-sm">Longitude</th>
+                <th class="th-sm">Enquêteur</th>
+                <th class="th-sm">Details</th>
             </tr>
         </thead>
         <tbody>
@@ -191,20 +176,22 @@
                     <td>{{ $foyer->latitude }}</td>
                     <td>{{ $foyer->longitude }}</td>
                     <td>{{ $foyer->user->name }}</td>
-                    <td>$320,800</td>
-                    <td>Example</td>
+                    <td>
+                        <a href="{{ route('foyer.show', $foyer->id) }}" class="btn  btn-sm btn-outline-primary">
+                            Details
+                        </a>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
         <tfoot>
             <tr>
-                <th>Name</th>
-                <th>Position</th>
-                <th>Office</th>
-                <th>Age</th>
-                <th>Start date</th>
-                <th>Salary</th>
-                <th>Example</th>
+                <th>Code</th>
+                <th>Nom village</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>Enquêteur</th>
+                <th>Details</th>
             </tr>
         </tfoot>
     </table>

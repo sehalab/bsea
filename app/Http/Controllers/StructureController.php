@@ -82,7 +82,7 @@ class StructureController extends Controller
      */
     public function show(Structure $structure)
     {
-        //
+        return $structure;
     }
 
     /**
@@ -93,7 +93,7 @@ class StructureController extends Controller
      */
     public function edit(Structure $structure)
     {
-        //
+        return $structure;
     }
 
     /**
@@ -105,7 +105,12 @@ class StructureController extends Controller
      */
     public function update(Request $request, Structure $structure)
     {
-        //
+        $structure->update([
+            "longueur" => $request->champs[1],
+            "largeur" => $request->champs[2],
+            "materiaux" => $request->champs[3],
+        ]);
+        return "ok";
     }
 
     /**

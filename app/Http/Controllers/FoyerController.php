@@ -78,8 +78,8 @@ class FoyerController extends Controller
                 return response()->json(['errors' => $validator->errors()], 500);
             }
 
-            $pictureName = 'PIC_'.time() . '.' . request()->photo->getClientOriginalExtension();
-            $imageName = 'IMG_'.time() . '.' . request()->image->getClientOriginalExtension();
+            $pictureName = 'PIC_' . time() . '.' . request()->photo->getClientOriginalExtension();
+            $imageName = 'IMG_' . time() . '.' . request()->image->getClientOriginalExtension();
             $request->photo->move(public_path('images'), $pictureName);
             $request->image->move(public_path('images'), $imageName);
 
@@ -108,11 +108,10 @@ class FoyerController extends Controller
                 'proprio_id' => $proprio->id,
             ]);
             return response()->json(['success' => 'Record is successfully added', 'foyer' => $foyer->id]);
-        }
-        else {
+        } else {
 
-            $pictureName = 'PIC_'.time() . '.' . request()->photo->getClientOriginalExtension();
-            $imageName = 'IMG_'.time() . '.' . request()->image->getClientOriginalExtension();
+            $pictureName = 'PIC_' . time() . '.' . request()->photo->getClientOriginalExtension();
+            $imageName = 'IMG_' . time() . '.' . request()->image->getClientOriginalExtension();
             $request->photo->move(public_path('images'), $pictureName);
             $request->image->move(public_path('images'), $imageName);
 
@@ -177,9 +176,9 @@ class FoyerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Foyer $foyer)
     {
-        //
+        return view('singlefoyer')->withFoyer($foyer);
     }
 
     /**

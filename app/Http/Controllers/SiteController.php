@@ -37,11 +37,11 @@ class SiteController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-                'description' => 'required|max:255|min:4',
-                'local_N' => 'required|alpha_num|max:255|min:4',
-                'local_E' => 'required|alpha_num|max:255|min:4',
-                'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            ],
+            'description' => 'required|max:255|min:4',
+            'local_N' => 'required|alpha_num|max:255|min:4',
+            'local_E' => 'required|alpha_num|max:255|min:4',
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ],
             [
                 'required' => 'La :attribute est requise',
                 'between' => "la :attribute :input doit être entre :min - :max",
@@ -61,15 +61,15 @@ class SiteController extends Controller
             "local_N" => $request->local_N,
             "local_E" => $request->local_E,
             "description" => $request->description,
-            "etat" => ($request->etat)?true:false,
+            "etat" => ($request->etat) ? true : false,
             "foyer_id" => $request->foyer_id,
         ]);
 
         return response()->json(['success' => 'Record is successfully added', 'foyer' => $request->foyer_id]);
     }
 
-
-    public function getPropriete($id){
+    public function getPropriete($id)
+    {
         return view('sites')->withPropriete($id);
     }
 
@@ -104,7 +104,13 @@ class SiteController extends Controller
      */
     public function update(Request $request, Site $site)
     {
-        //
+        $site->update([
+            "description" => $request->champs[1],
+            "etat" => $request->champs[2],
+            "local_E" => $request->champs[3],
+            "local_N" => $request->champs[4],
+        ]);
+        return "ok";
     }
 
     /**
