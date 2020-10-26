@@ -68,7 +68,7 @@ class MembreController extends Controller
 
         Membre::create($request->except("_token"));
 
-        return response()->json(['success' => 'Record is successfully added', 'foyer' => $request->propriete_id]);
+        return response()->json(['success' => 'Record is successfully added', 'foyer' => $request->foyer_id]);
 
     }
 

@@ -3,6 +3,7 @@
     <div class="container my-5 py-5 z-depth-1">
         <!--Section: Content-->
         <section class="dark-grey-text">
+            <a class="btn btn-primary" href="{{ URL::to('/foyers/pdf/'.$foyer->id) }}">Export to PDF</a>
             <h3 class="font-weight-bold text-center pt-4 mb-4">Foyer numero {{ $foyer->numero }}</h3>
             <div class="row mx-lg-5 mx-md-3">
                 <div class="col-md-4 mb-4">

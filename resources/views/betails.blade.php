@@ -17,10 +17,10 @@
                             <label for="nom">Nom</label>
                             <div class="invalid-feedback"></div>
                         </div>
-                    
+
                         <input type="hidden" id="next" next="arbres" name="foyer_id" value="{{ $propriete }}">
                             <!-- Sign in button -->
-                        <button type="submit" class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect" type="submit">Sign in</button>
+                        <button type="submit" class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect" type="submit">Valider</button>
                     </form>
                 </div>
             </div>

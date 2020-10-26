@@ -7,6 +7,8 @@ use App\Proprio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use PDF;
+
 
 class FoyerController extends Controller
 {
@@ -202,6 +204,17 @@ class FoyerController extends Controller
     public function update(Request $request, $id)
     {
         //
+    }
+
+    public function createPDF($id)
+    {
+        $foyer = Foyer::find($id);
+        view()->share('foyer', $foyer);
+
+        $pdf = PDF::loadView('welcome', $foyer);
+        //return $foyer;
+        return $pdf->download('pdf_file.pdf');
+
     }
 
     /**

@@ -108,8 +108,8 @@
                                                 <input class="file-path validate champ" type="text" placeholder="photo">
                                             </div>
                                         </div>
-                                    </div> 
-                                                    
+                                    </div>
+
                                     <div class="step-actions">
                                         <button class="waves-effect waves-dark btn btn-sm btn-primary next-step" data-feedback="someFunction"><i class="fa fa-check" aria-hidden="true"></i> Continuer</button>
                                         <button class="waves-effect waves-dark btn btn-sm btn-secondary previous-step"> <i class="fa fa-arrow-left" aria-hidden="true"></i> Retour</button>
@@ -121,7 +121,7 @@
                                 <div class="step-title waves-effect waves-dark">Details</div>
                                 <div class="step-new-content">
                                     <select class="mdb-select md-form select champ" name="statut">
-                                        <option value="" disabled selected>Selectionner genre</option>
+                                        <option value="" disabled selected>Propriété</option>
                                         <option value="locataire">Locataire</option>
                                         <option value="proprio">Proprio</option>
                                     </select>
@@ -132,37 +132,36 @@
                                         <label for="duree">Duree</label>
                                         <div class="invalid-feedback"></div>
                                     </div>
-                                                
+
                                     <p>Si locataire, </p>
 
                                     <div class="md-form">
-                                        <input type="text" name="nom_prop" id="nom" class="form-control champ">
+                                        <input type="text" name="nom_prop" id="nom" class="form-control champ loc">
                                         <label for="nom">Nom</label>
                                         <div class="invalid-feedback"></div>
                                     </div>
 
                                     <div class="md-form">
-                                        <input type="text" name="prenom" id="prenom" class="form-control champ">
+                                        <input type="text" name="prenom" id="prenom" class="form-control champ loc">
                                         <label for="prenom">Prenom</label>
                                         <div class="invalid-feedback"></div>
                                     </div>
 
                                     <div class="md-form">
-                                        <input type="text" name="telephone" id="telephone" class="form-control champ">
+                                        <input type="text" name="telephone" id="telephone" class="form-control champ loc">
                                         <label for="telephone">Telephone</label>
                                         <div class="invalid-feedback"></div>
                                     </div>
 
                                     <div class="md-form">
-                                        <input type="text" name="adresse" id="adresse" class="form-control champ">
+                                        <input type="text" name="adresse" id="adresse" class="form-control champ loc">
                                         <label for="adresse">Adresse</label>
                                         <div class="invalid-feedback"></div>
                                     </div>
                                     <input type="hidden" id="next" next="structures" name="next">
                                     <div class="step-actions">
                                         <div class="text-center">
-                                            <button id="reserve" class="btn btn-outline-black btn-rounded mt-5">Reserver</button>
-                                            <button type="button" class="btn btn-outline-light-green darken-1 btn-rounded mt-5" id="reserver" data-toggle="modal" data-target="#modalCart">Preview</button>
+                                            <button id="reserve" class="btn btn-outline-black btn-rounded mt-5">Valider</button>
                                         </div>
                                     </div>
                                 </div>

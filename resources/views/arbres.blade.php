@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">        
+    <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">
                 <h5 class="card-header info-color white-text text-center py-4">
@@ -24,9 +24,9 @@
                             <div class="invalid-feedback"></div>
                         </div>
 
-                        <input type="hidden" id="next" next="sites" name="foyer_id" value="{{ $propriete }}">
+                        <input type="hidden" id="next" name="foyer_id" value="{{ $propriete }}">
                             <!-- Sign in button -->
-                        <button type="submit" class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect" type="submit">Sign in</button>
+                        <button type="submit" class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect" type="submit">Valider</button>
                     </form>
                 </div>
             </div>
@@ -34,3 +34,4 @@
     </div>
 </div>
 @endsection
+

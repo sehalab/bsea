@@ -13,12 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::get('/', function () {
-    return view("home");
-})->middleware('auth');
+Route::get('/', "HomeController@index")->middleware('auth');
 
 Auth::routes();
-
+Route::get('/start', 'HomeController@enqStart')->name('start');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/foyer', 'FoyerController');
 Route::resource('/structure', 'StructureController');
@@ -33,3 +31,4 @@ Route::get('/tombes/{id}', 'TombeController@getPropriete');
 Route::get('/sites/{id}', 'SiteController@getPropriete');
 Route::get('/betails/{id}', 'BetailsController@getPropriete');
 Route::get('/arbres/{id}', 'ArbreController@getPropriete');
+Route::get('/foyers/pdf/{id}', 'FoyerController@createPDF');

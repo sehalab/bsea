@@ -61,10 +61,10 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <input type="hidden" next="detail" id="next" name="foyer_id" value="{{ $foyer }}">
                         <!-- Sign in button -->
-                        <button type="submit" class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect" type="submit">Sign in</button>
+                        <button type="submit" class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect" type="submit">Valider</button>
                     </form>
                 </div>
             </div>

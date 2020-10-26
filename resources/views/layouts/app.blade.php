@@ -57,7 +57,7 @@
                             </li>
 
                             <li>
-                                <a class="collapsible-header waves-effect" href="{{ route('foyer.index') }}">
+                                <a class="collapsible-header waves-effect" href="{{ route('home') }}">
                                     <i class="fas fa-database"></i> datas
                                 </a>
                             </li>
@@ -165,17 +165,7 @@
         })
     </script>
     <script>
-        $(document).ready(function(){
-            $('.select').change(function(e){
-                if($(this).val() === "proprio"){
-                    $('.form-control').each(function(index, element){
-                        if(typeof $(this).attr('required') == 'undefined'){
-                            $(this).attr('disabled', 'disabled');
-                        }
-                    });
-                }
-            })
-        });
+
         $(".loading-wrapper").hide();
 
         $(document).ready(function() {
@@ -200,7 +190,8 @@
                     success: function(response) {
                         toastr.success(response.success);
                         var foyer = response.foyer;
-                        location.href="../"+next+"/"+foyer;
+                        if(typeof next == "undefined") location.href="../foyer/"+foyer;
+                        else location.href="../"+next+"/"+foyer;
                     },
                     error: function(data) {
                         $.each(data.responseJSON.errors, function(key, value) {

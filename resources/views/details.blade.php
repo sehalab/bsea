@@ -17,7 +17,7 @@
                 <div class="card-body px-lg-5 carde">
                     <form method="POST" action="{{ route('details.store') }}" enctype="multipart/form-data" class="text-center" style="color: #757575;">
                         @csrf
-                                    
+
                         <select class="mdb-select md-form select champs" name="statut" required>
                             <option value="" disabled selected>Selectionner genre</option>
                             <option value="locataire">Locataire</option>
@@ -30,7 +30,7 @@
                             <label for="duree">Duree</label>
                             <div class="invalid-feedback"></div>
                         </div>
-                                    
+
                         <p>Si locataire, </p>
 
                         <div class="md-form">
@@ -59,7 +59,7 @@
 
                         <input type="hidden" id="next" next="structures" name="propriete_id" value="{{ $propriete }}">
                         <!-- Sign in button -->
-                        <button type="submit" class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect" type="submit">Sign in</button>
+                        <button type="submit" class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect" type="submit">Valider</button>
                     </form>
                 </div>
             </div>
